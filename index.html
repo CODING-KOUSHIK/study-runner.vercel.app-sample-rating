@@ -2,84 +2,121 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Study Runner – Sample Rating</title>
-  <meta name="description" content="Study Runner Sample Rating portal. Paste your study URL to access your personalised thank-you page." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Study Runner – Enter URL</title>
+  <meta name="description" content="Paste your study URL to record your submission." />
+
+  <!-- Exact same CSS as the original study-runner app -->
+  <link rel="stylesheet" href="https://study-runner.vercel.app/_next/static/css/b8f00d98c96b8caa.css" data-precedence="next" />
+
+  <!-- Preload the exact same Fellix fonts used by study-runner -->
+  <link rel="preload" href="https://study-runner.vercel.app/_next/static/media/75b6334742445b89-s.p.woff2" as="font" crossorigin="" type="font/woff2" />
+  <link rel="preload" href="https://study-runner.vercel.app/_next/static/media/8a6b3d49ef575236-s.p.woff2" as="font" crossorigin="" type="font/woff2" />
+  <link rel="preload" href="https://study-runner.vercel.app/_next/static/media/fe237bab4483b496-s.p.woff2" as="font" crossorigin="" type="font/woff2" />
+  <link rel="shortcut icon" href="https://study-runner.vercel.app/favicon-hume.ico" />
 </head>
-<body>
+<body class="min-h-screen font-sans antialiased __variable_3c45cb">
 
-  <!-- Animated background blobs -->
-  <div class="bg-blob blob-1"></div>
-  <div class="bg-blob blob-2"></div>
-  <div class="bg-blob blob-3"></div>
+  <main class="flex min-h-screen w-full flex-col items-center p-8">
+    <div class="flex h-screen w-full max-w-[800px] flex-col items-start justify-start gap-4">
 
-  <main class="page-center">
-    <div class="card" id="main-card">
+      <div class="text-2xl font-bold sm:text-3xl">Enter your study URL</div>
 
-      <!-- Logo / Icon -->
-      <div class="logo-wrap">
-        <div class="logo-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-        </div>
-        <span class="logo-badge">Study Runner</span>
+      <div class="break-all text-base sm:text-lg">
+        Paste the full study URL you received and click <strong>Continue</strong> to record your submission.
       </div>
 
-      <h1 class="card-title">Sample Rating Portal</h1>
-      <p class="card-subtitle">
-        Paste your unique study URL below to access your personalised submission page.
-      </p>
-
-      <!-- URL Input -->
-      <form id="url-form" novalidate>
-        <div class="input-wrap" id="input-wrap">
-          <span class="input-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-            </svg>
-          </span>
-          <input
-            type="text"
-            id="study-url"
-            name="study-url"
-            class="url-input"
-            placeholder="https://study-runner.vercel.app/sample-rating?participantId=..."
-            autocomplete="off"
-            spellcheck="false"
-          />
-          <button type="submit" class="submit-btn" id="submit-btn">
-            <span class="btn-text">Continue</span>
-            <span class="btn-arrow">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </span>
-          </button>
-        </div>
-        <div class="error-msg" id="error-msg" role="alert" aria-live="polite"></div>
+      <form id="url-form" style="width:100%;display:flex;flex-direction:column;gap:0.75rem;" novalidate>
+        <input
+          type="text"
+          id="study-url"
+          name="study-url"
+          placeholder="https://study-runner.vercel.app/sample-rating?participantId=..."
+          autocomplete="off"
+          spellcheck="false"
+          style="
+            width: 100%;
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            padding: 0.5rem 0.75rem;
+            outline: none;
+            box-sizing: border-box;
+          "
+        />
+        <div id="error-msg" style="color:hsl(var(--destructive));font-size:0.875rem;min-height:1.25rem;"></div>
+        <button
+          type="submit"
+          id="submit-btn"
+          style="
+            align-self: flex-start;
+            background-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+            border: none;
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.5rem 1.25rem;
+            cursor: pointer;
+            transition: opacity 0.15s;
+          "
+          onmouseover="this.style.opacity='0.85'"
+          onmouseout="this.style.opacity='1'"
+        >
+          Continue
+        </button>
       </form>
-
-      <!-- Helper hint -->
-      <div class="hint-box">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hint-icon">
-          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-        </svg>
-        <p class="hint-text">
-          Your URL contains a <code>participantId</code> parameter that uniquely identifies your submission.
-          The system extracts it automatically.
-        </p>
-      </div>
 
     </div>
   </main>
 
-  <script src="app.js"></script>
+  <script>
+    (function () {
+      var form  = document.getElementById('url-form');
+      var input = document.getElementById('study-url');
+      var errEl = document.getElementById('error-msg');
+
+      function extractParams(raw) {
+        raw = (raw || '').trim();
+        if (!raw) return null;
+        var search = '';
+        try { search = new URL(raw).search; }
+        catch (_) { search = raw.indexOf('?') === -1 ? '?' + raw : raw; }
+        var p = new URLSearchParams(search);
+        return {
+          participantId : p.get('participantId')  || '',
+          studyId       : p.get('studyId')        || '',
+          submissionId  : p.get('submissionId')   || '',
+          TASK_TYPE     : p.get('TASK_TYPE')      || '',
+          PAGE          : p.get('PAGE')           || '',
+          PAGE_SIZE     : p.get('PAGE_SIZE')      || '',
+          step          : p.get('step')           || '',
+          MANUAL        : p.get('MANUAL')         || '',
+          PREASSIGNED   : p.get('PREASSIGNED')    || '',
+        };
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errEl.textContent = '';
+        var raw    = input.value.trim();
+        if (!raw)  { errEl.textContent = 'Please paste your study URL.'; return; }
+        var params = extractParams(raw);
+        if (!params || !params.participantId) {
+          errEl.textContent = 'Could not find a participantId in the URL. Please check and try again.';
+          return;
+        }
+        var dest = new URL('thankyou.html', window.location.href);
+        Object.keys(params).forEach(function (k) { if (params[k]) dest.searchParams.set(k, params[k]); });
+        window.location.href = dest.toString();
+      });
+    })();
+  </script>
+
 </body>
 </html>
