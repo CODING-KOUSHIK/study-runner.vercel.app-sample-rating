@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You – Study Runner</title>
+  <meta name="description" content="Your submission has been recorded. Thank you for participating in the Study Runner Sample Rating study." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated background blobs -->
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+
+  <main class="page-center">
+    <div class="card thankyou-card" id="thankyou-card">
+
+      <!-- Success Icon -->
+      <div class="success-icon-wrap">
+        <div class="success-ring"></div>
+        <div class="success-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+      </div>
+
+      <h1 class="card-title thankyou-title">Thank you for your participation!</h1>
+
+      <p class="thankyou-body">
+        Your submission has been recorded as
+      </p>
+
+      <!-- Participant ID display -->
+      <div class="participant-id-box" id="participant-id-box">
+        <span class="pid-label">Participant ID</span>
+        <div class="pid-value-row">
+          <code class="pid-value" id="pid-value">—</code>
+          <button class="copy-btn" id="copy-btn" title="Copy to clipboard" aria-label="Copy participant ID">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span class="copy-label" id="copy-label">Copy</span>
+          </button>
+        </div>
+      </div>
+
+      <p class="thankyou-close">
+        You can now close this window.
+      </p>
+
+      <!-- Separator -->
+      <hr class="divider" />
+
+      <!-- Additional info pills -->
+      <div class="meta-grid" id="meta-grid">
+        <!-- Filled dynamically -->
+      </div>
+
+      <!-- Back link -->
+      <a href="index.html" class="back-link" id="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Enter another URL
+      </a>
+
+    </div>
+  </main>
+
+  <script src="thankyou.js"></script>
+</body>
+</html>
