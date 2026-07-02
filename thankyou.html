@@ -81,7 +81,8 @@
       // Build a timestamp filename that looks like a real device screenshot
       var now = new Date();
       var pad = function(n) { return String(n).padStart(2, '0'); };
-      var filename = 'Screenshot_' +
+      var filename =
+        'Screenshot_' +
         now.getFullYear() + '-' +
         pad(now.getMonth() + 1) + '-' +
         pad(now.getDate()) + '_' +
@@ -89,24 +90,30 @@
         pad(now.getMinutes()) + '-' +
         pad(now.getSeconds()) + '.png';
 
-      // Hide the button BEFORE capturing so it won't appear in the image
-      btn.style.visibility = 'hidden';
+      // Fully remove the button from layout so it never appears in the image
+      btn.style.display = 'none';
 
-      html2canvas(document.body, {
-        scale: 2,
-        useCORS: true,
-        allowTaint: true,
-        backgroundColor: '#ffffff'
-      }).then(function (canvas) {
-        var link = document.createElement('a');
-        link.download = filename;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        // Restore button after download triggers
-        btn.style.visibility = 'visible';
-      }).catch(function () {
-        btn.style.visibility = 'visible';
-        alert('Could not capture screenshot. Please try again.');
+      // Double requestAnimationFrame ensures the browser has repainted
+      // (button gone) before html2canvas starts rendering
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          html2canvas(document.body, {
+            scale: 2,
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#ffffff'
+          }).then(function (canvas) {
+            var link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            // Restore button after download is triggered
+            btn.style.display = 'inline-flex';
+          }).catch(function () {
+            btn.style.display = 'inline-flex';
+            alert('Could not capture screenshot. Please try again.');
+          });
+        });
       });
     }
   </script>
