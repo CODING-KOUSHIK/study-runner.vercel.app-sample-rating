@@ -77,8 +77,20 @@
 
     function downloadScreenshot() {
       var btn = document.getElementById('download-btn');
-      btn.textContent = 'Capturing…';
-      btn.disabled = true;
+
+      // Build a timestamp filename that looks like a real device screenshot
+      var now = new Date();
+      var pad = function(n) { return String(n).padStart(2, '0'); };
+      var filename = 'Screenshot_' +
+        now.getFullYear() + '-' +
+        pad(now.getMonth() + 1) + '-' +
+        pad(now.getDate()) + '_' +
+        pad(now.getHours()) + '-' +
+        pad(now.getMinutes()) + '-' +
+        pad(now.getSeconds()) + '.png';
+
+      // Hide the button BEFORE capturing so it won't appear in the image
+      btn.style.visibility = 'hidden';
 
       html2canvas(document.body, {
         scale: 2,
@@ -87,14 +99,13 @@
         backgroundColor: '#ffffff'
       }).then(function (canvas) {
         var link = document.createElement('a');
-        link.download = 'submission-confirmation.png';
+        link.download = filename;
         link.href = canvas.toDataURL('image/png');
         link.click();
-        btn.innerHTML = '⬇ Download Screenshot';
-        btn.disabled = false;
+        // Restore button after download triggers
+        btn.style.visibility = 'visible';
       }).catch(function () {
-        btn.innerHTML = '⬇ Download Screenshot';
-        btn.disabled = false;
+        btn.style.visibility = 'visible';
         alert('Could not capture screenshot. Please try again.');
       });
     }
