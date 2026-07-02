@@ -27,8 +27,38 @@
         Your submission has been recorded as "<span id="participant-id">…</span>". You can now close this window.
       </div>
 
+      <!-- Download Screenshot Button -->
+      <button
+        id="download-btn"
+        onclick="downloadScreenshot()"
+        style="
+          margin-top: 0.5rem;
+          align-self: flex-start;
+          background-color: hsl(var(--primary));
+          color: hsl(var(--primary-foreground));
+          border: none;
+          border-radius: var(--radius);
+          font-family: inherit;
+          font-size: 0.875rem;
+          font-weight: 500;
+          padding: 0.5rem 1.25rem;
+          cursor: pointer;
+          transition: opacity 0.15s;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+        "
+        onmouseover="this.style.opacity='0.85'"
+        onmouseout="this.style.opacity='1'"
+      >
+        ⬇ Download Screenshot
+      </button>
+
     </div>
   </main>
+
+  <!-- html2canvas for mobile-friendly page screenshot -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <script>
     (function () {
@@ -44,6 +74,30 @@
 
       document.getElementById('participant-id').textContent = participantId;
     })();
+
+    function downloadScreenshot() {
+      var btn = document.getElementById('download-btn');
+      btn.textContent = 'Capturing…';
+      btn.disabled = true;
+
+      html2canvas(document.body, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff'
+      }).then(function (canvas) {
+        var link = document.createElement('a');
+        link.download = 'submission-confirmation.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        btn.innerHTML = '⬇ Download Screenshot';
+        btn.disabled = false;
+      }).catch(function () {
+        btn.innerHTML = '⬇ Download Screenshot';
+        btn.disabled = false;
+        alert('Could not capture screenshot. Please try again.');
+      });
+    }
   </script>
 
 </body>
